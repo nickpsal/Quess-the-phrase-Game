@@ -16,7 +16,7 @@ class App:
         self.widgets()
 
     def widgets(self):
-        shuffled_text = self.shuffle_text_and_words(self.text)
+        shuffled_text = self.shuffle_text_and_words()
         self.label = tk.Label(self.root, text="Βρείτε την Φράση!!!!!", font=self.fnt)
         self.label2 = tk.Label(self.root, text=shuffled_text, font=self.fnt)
         self.label3 = tk.Label(self.root, text='', font=self.fnt)
@@ -28,12 +28,11 @@ class App:
         self.entry.pack(fill="both", expand=True)
         self.button.pack(fill="both", expand=True)
 
-    @staticmethod
-    def shuffle_text_and_words(text):
+    def shuffle_text_and_words(self):
         puzzle = []
         t = ''
-        text += ' '
-        for i in text:
+        self.text += ' '
+        for i in self.text:
             if i != ' ':
                 t += i
             else:
@@ -46,8 +45,8 @@ class App:
         return shuffled_text
 
     def check_answer(self):
-        text = self.entry.get()
-        if text == self.text:
+        t = self.entry.get()
+        if t == self.text:
             resp = "Συγχαρητήρια το βρήκες"
         else:
             resp = "Όχι δεν τα κατάφερες ξαναδοκίμασε"
