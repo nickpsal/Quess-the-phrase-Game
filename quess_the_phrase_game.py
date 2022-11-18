@@ -29,15 +29,7 @@ class App:
         self.button.pack(fill="both", expand=True)
 
     def shuffle_text_and_words(self):
-        puzzle = []
-        t = ''
-        self.text += ' '
-        for i in self.text:
-            if i != ' ':
-                t += i
-            else:
-                puzzle.append(t)
-                t = ''
+        puzzle = self.text.split()
         random.shuffle(puzzle)
         shuffled_text = ''
         for i in puzzle:
