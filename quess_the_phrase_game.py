@@ -20,19 +20,6 @@ class App:
         self.choose_words()
         self.widgets()
 
-    def get_word_from_file(self):
-        with open(self.filename, 'r', encoding="utf-8") as f:
-            w = f.readlines()
-        f.close()
-        for i in w:
-            i = i.strip()
-            self.words.append(i)
-        random.shuffle(self.words)
-        print(self.words)
-
-    def choose_words(self):
-        self.text = random.choice(self.words)
-
     def widgets(self):
         shuffled_text = self.shuffle_text_and_words()
         self.label1 = tk.Label(self.root, text="Βρείτε την Φράση!!!!!", font=self.fnt)
@@ -47,6 +34,19 @@ class App:
         self.entry.pack(fill="both", expand=True)
         self.button.pack(fill="y", expand=True, side="left")
         self.button2.pack(fill="y", expand=True, side="right")
+
+    def get_word_from_file(self):
+        with open(self.filename, 'r', encoding="utf-8") as f:
+            w = f.readlines()
+        f.close()
+        for i in w:
+            i = i.strip()
+            self.words.append(i)
+        random.shuffle(self.words)
+        print(self.words)
+
+    def choose_words(self):
+        self.text = random.choice(self.words)
 
     def shuffle_text_and_words(self):
         puzzle = self.text.split()
