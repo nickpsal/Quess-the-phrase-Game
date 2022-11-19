@@ -20,6 +20,8 @@ class App:
         self.button3 = None
         self.entry = None
         self.get_word_from_file()
+        random.shuffle(self.words)
+        print(self.words)
         self.choose_words()
         self.shuffled_text = self.shuffle_text_and_words()
         self.widgets()
@@ -46,14 +48,13 @@ class App:
         for i in w:
             i = i.strip()
             self.words.append(i)
-        random.shuffle(self.words)
-        print(self.words)
 
     def choose_words(self):
         self.text = random.choice(self.words)
 
     def shuffle_text_and_words(self):
         puzzle = self.text.split()
+        print(puzzle)
         random.shuffle(puzzle)
         shuffled_text = ''
         for i in puzzle:
@@ -61,17 +62,16 @@ class App:
         return shuffled_text
 
     def check_answer(self):
-        t = self.entry.get()
-        if t == self.text:
+        if self.entry.get() == self.text:
             msg_box = mg.askquestion('Συγχαρητήρια ', 'Συγχαρητήρια Κερδίσατε. Θέλετε να ξανά παίξετε???')
             if msg_box == 'yes':
-                r.destroy()
+                self.root.destroy()
                 r2 = tk.Tk()
                 r2.title("Βρείτε την Φράση!!!!!!")
                 App(r2)
                 r2.mainloop()
             else:
-                self.exit_game()
+                self.root.destroy()
         else:
             resp = "Όχι δεν τα κατάφερες ξαναδοκίμασε"
             self.label3.config(text=resp)
