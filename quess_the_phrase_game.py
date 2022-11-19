@@ -4,12 +4,11 @@ import random
 
 class App:
     def __init__(self, root):
-        self.button = None
-        self.entry = None
+        self.label1 = None
         self.label3 = None
         self.label2 = None
-        self.label = None
-        self.f = None
+        self.button = None
+        self.entry = None
         self.root = root
         self.fnt = "Arial 30"
         self.text = "Καλησπέρα απο την Python"
@@ -17,12 +16,12 @@ class App:
 
     def widgets(self):
         shuffled_text = self.shuffle_text_and_words()
-        self.label = tk.Label(self.root, text="Βρείτε την Φράση!!!!!", font=self.fnt)
+        self.label1 = tk.Label(self.root, text="Βρείτε την Φράση!!!!!", font=self.fnt)
         self.label2 = tk.Label(self.root, text=shuffled_text, font=self.fnt)
         self.label3 = tk.Label(self.root, text='', font=self.fnt)
         self.entry = tk.Entry(self.root, font=self.fnt, width=40, justify="center")
         self.button = tk.Button(self.root, text="Έλεγχος Απάντησης", font=self.fnt, command=self.check_answer)
-        self.label.pack(fill="both", expand=True)
+        self.label1.pack(fill="both", expand=True)
         self.label2.pack(fill="both", expand=True)
         self.label3.pack(fill="both", expand=True)
         self.entry.pack(fill="both", expand=True)
