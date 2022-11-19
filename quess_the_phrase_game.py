@@ -6,9 +6,10 @@ import random
 class App:
     def __init__(self, root):
         self.root = root
+        self.root.title("Βρείτε την Φράση!!!!!!")
+        self.root.configure(bg="grey")
         self.fnt = "Arial 30"
         self.filename = "words.txt"
-        self.shuffled_text = ''
         self.words = []
         self.text = ''
         self.label1 = None
@@ -20,10 +21,10 @@ class App:
         self.entry = None
         self.get_word_from_file()
         self.choose_words()
+        self.shuffled_text = self.shuffle_text_and_words()
         self.widgets()
 
     def widgets(self):
-        self.shuffled_text = self.shuffle_text_and_words()
         self.label1 = tk.Label(self.root, text="Βρείτε την Φράση!!!!!", font=self.fnt, bg="grey")
         self.label2 = tk.Label(self.root, text=self.shuffled_text, font=self.fnt, bg="grey")
         self.label3 = tk.Label(self.root, text='', font=self.fnt, bg="grey")
@@ -80,7 +81,5 @@ class App:
 
 
 r = tk.Tk()
-r.title("Βρείτε την Φράση!!!!!!")
-r.configure(bg="grey")
 App(r)
 r.mainloop()
