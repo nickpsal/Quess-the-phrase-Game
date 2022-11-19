@@ -5,29 +5,32 @@ import random
 
 class App:
     def __init__(self, root):
-        self.button2 = None
+        self.root = root
+        self.fnt = "Arial 30"
+        self.filename = "words.txt"
+        self.shuffled_text = ''
+        self.words = []
+        self.text = ''
         self.label1 = None
         self.label3 = None
         self.label2 = None
         self.button = None
+        self.button2 = None
+        self.button3 = None
         self.entry = None
-        self.root = root
-        self.fnt = "Arial 30"
-        self.filename = "words.txt"
-        self.words = []
-        self.text = ''
         self.get_word_from_file()
         self.choose_words()
         self.widgets()
 
     def widgets(self):
-        shuffled_text = self.shuffle_text_and_words()
-        self.label1 = tk.Label(self.root, text="Βρείτε την Φράση!!!!!", font=self.fnt)
-        self.label2 = tk.Label(self.root, text=shuffled_text, font=self.fnt)
-        self.label3 = tk.Label(self.root, text='', font=self.fnt)
-        self.entry = tk.Entry(self.root, font=self.fnt, width=40, justify="center")
-        self.button = tk.Button(self.root, text="Έλεγχος Απάντησης", font=self.fnt, command=self.check_answer)
-        self.button2 = tk.Button(self.root, text="Έξοδος", font=self.fnt, command=self.exit_game)
+        self.shuffled_text = self.shuffle_text_and_words()
+        self.label1 = tk.Label(self.root, text="Βρείτε την Φράση!!!!!", font=self.fnt, bg="grey")
+        self.label2 = tk.Label(self.root, text=self.shuffled_text, font=self.fnt, bg="grey")
+        self.label3 = tk.Label(self.root, text='', font=self.fnt, bg="grey")
+        self.entry = tk.Entry(self.root, font=self.fnt, width=40, justify="center", bg="grey")
+        self.button = tk.Button(self.root, text="Έλεγχος Απάντησης", font=self.fnt, command=self.check_answer,
+                                bg="grey")
+        self.button2 = tk.Button(self.root, text="Έξοδος", font=self.fnt, command=self.exit_game, bg="grey")
         self.label1.pack(fill="both", expand=True)
         self.label2.pack(fill="both", expand=True)
         self.label3.pack(fill="both", expand=True)
@@ -78,5 +81,6 @@ class App:
 
 r = tk.Tk()
 r.title("Βρείτε την Φράση!!!!!!")
+r.configure(bg="grey")
 App(r)
 r.mainloop()
