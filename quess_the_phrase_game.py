@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox as mg
 import random
+import time
 
 
 class App:
@@ -11,8 +12,10 @@ class App:
         self.root.resizable(False, False)
         self.fnt = "Arial 30"
         self.filename = "words.txt"
+        self.total_time = 3*60
         self.words = []
         self.text = ''
+        self.timer = None
         self.label3 = None
         self.entry = None
         self.get_word_from_file()
@@ -27,6 +30,7 @@ class App:
         frame1 = tk.Frame(self.root, bg="grey")
         label1 = tk.Label(frame1, text="Βρείτε την Φράση!!!!!", font=self.fnt, bg="grey")
         label2 = tk.Label(frame1, text=self.shuffled_text, font=self.fnt, bg="grey")
+        self.timer = tk.Label(frame1, text=self.total_time, font=self.fnt, bg="grey")
         self.label3 = tk.Label(frame1, text='', font=self.fnt, bg="grey")
         self.entry = tk.Entry(frame1, font=self.fnt, width=40, justify="center", bg="grey")
         frame2 = tk.Frame(self.root, bg="grey")
@@ -38,11 +42,28 @@ class App:
         frame2.pack(fill="both", expand=True, side="bottom", padx=5, pady=5)
         label1.pack(fill="both", expand=True)
         label2.pack(fill="both", expand=True)
+        self.timer.pack(fill="both", expand=True)
         self.label3.pack(fill="both", expand=True)
         self.entry.pack(fill="both", expand=True)
         button.pack(fill="y", expand=True, side="left")
         button2.pack(fill="y", expand=True, side="right")
         button3.pack(fill="y", expand=True, side="left")
+        self.countdown_timer()
+
+    def countdown_timer(self):
+        while self.total_time > 0:
+            mins, secs = divmod(self.total_time, 60)
+            self.timer.config(text=f"Έχεις ακόμα {mins} λεπτά και {secs} δευτερόλεπτα")
+            self.root.update()
+            time.sleep(1)
+            self.total_time -= 1
+        if self.total_time == 0:
+            nfo_box = mg.showinfo("Πληροφορίες", "Τέλος Χρόνου")
+            self.root.destroy()
+            r2 = tk.Tk()
+            r2.title("Βρείτε την Φράση!!!!!!")
+            App(r2)
+            r2.mainloop()
 
     def get_word_from_file(self):
         with open(self.filename, 'r', encoding="utf-8") as f:
